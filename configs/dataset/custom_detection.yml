@@ -1,0 +1,43 @@
+task: detection
+
+evaluator:
+  type: CocoEvaluator
+  iou_types: ['bbox', ]
+
+num_classes: 14 # your dataset classes
+remap_mscoco_category: False
+
+train_dataloader:
+  type: DataLoader
+  dataset:
+    type: CocoDetection
+    img_folder: /home/shekhar/identv/D-FINE/data/train
+    ann_file: /home/shekhar/identv/D-FINE/data/train.json
+    return_masks: False
+    transforms:
+      type: Compose
+      ops: ~
+  shuffle: True
+  num_workers: 4
+  total_batch_size: 8
+  drop_last: True
+  collate_fn:
+    type: BatchImageCollateFunction
+
+
+val_dataloader:
+  type: DataLoader
+  total_batch_size: 8
+  dataset:
+    type: CocoDetection
+    img_folder: /home/shekhar/identv/D-FINE/data/val
+    ann_file: /home/shekhar/identv/D-FINE/data/val.json
+    return_masks: False
+    transforms:
+      type: Compose
+      ops: ~
+  shuffle: False
+  num_workers: 4
+  drop_last: False
+  collate_fn:
+    type: BatchImageCollateFunction

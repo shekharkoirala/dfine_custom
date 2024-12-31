@@ -1,0 +1,9 @@
+*.mp4
+*.jpg
+*.png
+*.jpeg
+*.json
+*.pth
+*.pt
+.venv
+.ropeproject
